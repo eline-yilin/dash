@@ -3,8 +3,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>吃心江湖</title>
-<link rel="icon" href="<?php echo $this->config->item( 'base_theme_url');?>images/logo(2).ico" />
+<title>后台管理</title>
+<link rel="icon" href="<?php echo $this->config->item( 'base_theme_url');?>images/fav1.ico" />
  <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
@@ -31,7 +31,7 @@
            <?php foreach( $this->config->item( 'nav_arr') as $key => $nav_item):
             $text = isset( $nav_item['text']) ? $nav_item['text'] : $key;
             $href = isset( $nav_item['href']) ? $nav_item['href'] : $key;
-            $href = '#' . $href;
+            $href = $this->config->item('base_url') . $href;
            ?>
            		<li class='nav-item' id='nav-item-<?php echo $key;?>'><a href='<?php echo $href;?>'><?php echo $text;?></a></li>
            <?php endforeach;?>

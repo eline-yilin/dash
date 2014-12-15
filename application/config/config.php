@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/store/';
+$config['base_url']	= 'http://localhost/dash/index.php/';
 
 /*
 |--------------------------------------------------------------------------
@@ -360,18 +360,19 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
-$config['base_theme_url']	= 'http://localhost/store/public/themes/';
+$config['base_theme_url']	= 'http://localhost/dash/public/themes/';
 $config['api_url']	= 'http://localhost/ci/index.php/api/';
+$config['cdn_path']	= 'D:/cdn/';
 $config['nav_arr'] = array(
 
-    "bussiness" => array(
-    			'text'=>"产品列表"
+    "product" => array(
+    			'text'=>"产品管理"
     			),
-		"about" => array(
-				'text'=>"关于我们"
+		"store" => array(
+				'text'=>"商铺管理"
 		),
 
-		"contact" => array(
-				'text'=>"联系我们"
+		"user" => array(
+				'text'=>"用户管理"
 		),
 );
