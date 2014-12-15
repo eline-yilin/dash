@@ -17,6 +17,23 @@ class product extends My_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+	
+	protected function uploadImg($input_name, &$error){
+		if ( ! $this->upload->do_upload($input_name))
+		{
+			$error = $this->upload->display_errors();
+			return  false;
+		}
+		else
+		{
+			$data['upload_data'] = $this->upload->data();
+			$filepath = $data['upload_data']['file_name'];
+			return $filepath;
+	
+			//$this->load->view('upload_success', $data);
+		}
+	}
+	
 	public function index()
 	{
 		$this->load->view('welcome_message');
@@ -70,7 +87,7 @@ class product extends My_Controller {
 		$this->form_validation->set_rules($validation_rules);
 
 		$this->load->view('templates/header', $data);
-		
+		//invalid or first load, load page normally
 		if ($this->form_validation->run() === FALSE)
 		{
 			
@@ -78,37 +95,58 @@ class product extends My_Controller {
 			
 		
 		}
+		//process upload
 		else
 		{
-			$upload_config['upload_path'] =  $this->config->item( 'cdn_path') . 'products/';
+			//product entity
+			$request = array(
+					'name'=>$this->input->post('productname'),
+					'category_id'=>$this->input->post('category'),
+					'price'=>$this->input->post('price'),
+					'description'=>$this->input->post('description'),
+					''=>$this->input->post(''),
+			);
+			
+			//init upload lib
+			$upload_config['upload_path'] =  $this->config->item( 'cdn_path') . 'product/';
 			$upload_config['allowed_types'] = 'gif|jpg|png|jpeg';
-			$config['remove_spaces']  = TRUE;
+			$upload_config['remove_spaces']  = TRUE;
 			$upload_config['max_size']	= '1000';
 			$upload_config['max_width']  = '1024';
 			$upload_config['max_height']  = '768';
 			
 			$this->load->library('upload', $upload_config);
-			
-			if ( ! $this->upload->do_upload('thumbnail1'))
+			$errors = array();
+			//read imgs
+			for($i = 1; $i <=10; $i++)
 			{
-				$error = array('error' => $this->upload->display_errors());
+				if(isset($this->input->post('thumbnail' . $i)))
+				{
+				  $upload_name = 'thumbnail' . $i;
+				  $img_url =  $this->uploadImg($upload_name, $errors);
+				}
+				else
+				{
+					break;
+				}
+			}
 			
-				$this->load->view('pages/products/create', $error);
+			if(count($errors) > 0)
+			{
+				$this->load->view('pages/products/create', $errors);
 			}
 			else
 			{
-				$data['upload_data'] = $this->upload->data();
-				$filepath = $data['upload_data']['file_name'];
-				$request = array();
-				
+				//call create api
 				$this->load->helper('api');
 				$api_url = $this->config->item( 'api_url');
 				$request_url = 'store/detail/format/json';
 				$final_url = $api_url . $request_url;
 				$data = my_api_request($final_url , $method = 'post', $request);
-				$this->load->view('pages/products/create', $error);
-				//$this->load->view('upload_success', $data);
+				$resp = array('resp'=>$data);
+				$this->load->view('pages/products/create', $resp);
 			}
+			
 			//$this->news_model->set_news();
 			//$this->load->view('news/success');
 		}
