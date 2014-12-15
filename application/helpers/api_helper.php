@@ -8,11 +8,16 @@ if ( ! function_exists('my_api_request'))
 		curl_setopt ( $ch, CURLOPT_URL,  $url );
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
 		curl_setopt ( $ch, CURLOPT_HEADER, 0 );
-		
+		if(strtolower($method) == 'post')
+		{
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$param);
+		}
 		// 执行并获取HTML文档内容
 		$output = curl_exec ( $ch );
 		// 释放curl句柄
 		curl_close ( $ch );
+		print_r ( $output );
 		return $output;
 		//print_r ( $output );
        
