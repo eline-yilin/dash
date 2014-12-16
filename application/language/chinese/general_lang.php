@@ -1,8 +1,8 @@
 <?php
-
+$lang['required_error']			= "请输入";
 $lang['uploadimage']			= "上传图片";
 $lang['addImg']					= "添加图片";
-$lang['imgsizelimit']			= "图片大小为";
+$lang['imgsizelimit']			= "图片大小不超过1024*768";
 $lang['addproduct']			= "添加产品";
 $lang['productname']			= "产品名称";
 $lang['category']			= "类目";

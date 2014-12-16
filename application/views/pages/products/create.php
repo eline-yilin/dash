@@ -3,7 +3,10 @@
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
 <?php if(isset($upload_data)) var_dump($upload_data);?>
-<?php echo form_open_multipart('../product/create') ?>
+<?php 
+$attributes = array('class' => 'product_create', 'id' => 'product_create');
+echo form_open_multipart('../product/create', $attributes);
+ ?>
 
      <input type="hidden" id='_method' name="_method" value="CREATE">
 	<input type='hidden' name='postback' value='1' />
@@ -40,28 +43,28 @@
           <!-- Text input-->
           <label class="control-label" for="username"><?php echo $this->lang->line('productname'); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge" name='productname' id='productname'  value={item.productname}>
+            <input type="text"  class="input-xlarge required" name='productname' id='productname'  value=''>
           </div>
           <!-- category-->
 		  <label class="control-label hidden" for="phone"><?php echo $this->lang->line('category'); ?></label>
           <div class="controls hidden">
-            <input type="text"  class="input-xlarge" name='category' id='category' value={item.category}>
+            <input type="text"  class="input-xlarge" name='category' id='category' value=''>
           </div>
            <!-- price-->
 		  <label class="control-label" for="price"><?php echo $this->lang->line('price'); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge" name='price' id='price' value={item.price}>
+            <input type="text"  class="input-xlarge required" name='price' id='price' value=''>
           </div>
           <!-- desc-->
           <label class="control-label" for="phone"><?php echo $this->lang->line('description'); ?></label>
           <div class="controls">
-            <textarea  class="input-xlarge" name='description' id='description'> {item.description}</textarea>
+            <textarea  class="input-xlarge" name='description' id='description'></textarea>
           </div>
     </div>
         
     </fieldset>
     <!-- entity Info-->
-    <fieldset>
+    <fieldset style='display:none;'>
       <div id="legend" class="">
         <legend class=""><?php echo $this->lang->line('displayinfo'); ?></legend>
     <div class="control-group">
@@ -93,6 +96,7 @@
 	</div>
 
 </form>
+ <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <script>  
        
        function addImage()
@@ -101,4 +105,73 @@
           $("#imgTemplate").clone().removeClass('hidden').insertAfter("div.imgRow:last");
           $("div.imgRow:last").find('input').attr('name','thumbnail' +　index).attr('id','thumbnail' +　index );
         }
+       var validator_messages = {
+
+    	         'price': {
+
+    	             required: "<?php echo $this->lang->line('required_error') . $this->lang->line('price');?>"
+    	         },
+    	         'productname': {
+
+    	             required: "<?php echo $this->lang->line('required_error') . $this->lang->line('productname');?>"
+    	         }
+       };
+       function validator_show_errors(errorMap,errorList, form){
+
+    	   jQuery('label.ton-error').remove();
+    	  
+    	   for (var i in errorMap) {
+
+    	       var rst = errorMap[i];
+
+    	         console.log(i, ":", rst);
+
+    	         var selector = i.replace(/\[/ig, '');
+
+    	         selector = selector.replace(/\]/ig, '');
+
+    	       
+
+    	         switch (i)
+
+    	         {    
+    	               default:             
+    	               $('#' + i).after('<label class="error my-error for_' + selector +  '">' + rst + '</label>');
+
+    	                   break;
+
+    	              }
+
+    	   }
+
+    	  }
+       $(document).ready(function(){ 
+    	   var add_validator = jQuery('#product_create').validate({
+
+    	         ignore: "",
+
+    	         onkeyup: false,//function(element) {},
+
+    	         onfocusout: false,
+
+    	         messages : validator_messages ,
+
+    	         showErrors: function(errorMap, errorList)
+
+    	         {           
+
+    	          validator_show_errors(errorMap, errorList,'#product_create');            
+
+    	         },
+
+    	         submitHandler: function(form) {
+
+    	             form.submit();
+
+    	         },           
+
+    	     });
+
+       
+           });
         </script>

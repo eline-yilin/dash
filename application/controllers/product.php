@@ -104,7 +104,7 @@ class product extends My_Controller {
 					'category_id'=>$this->input->post('category'),
 					'price'=>$this->input->post('price'),
 					'description'=>$this->input->post('description'),
-					'img' => array()
+					
 					//''=>$this->input->post(''),
 			);
 			
@@ -118,6 +118,7 @@ class product extends My_Controller {
 			
 			$this->load->library('upload', $upload_config);
 			$errors = array();
+			$images = array();
 			//read imgs
 			for($i = 1; $i <=10; $i++)
 			{
@@ -126,7 +127,8 @@ class product extends My_Controller {
 				{
 				  $upload_name = 'thumbnail' . $i;
 				  $img_url =  $this->uploadImg($upload_name, $errors);
-				  $request['img'][] = $img_url;
+				  $images[] = $img_url;
+				  
 				}
 				else
 				{
@@ -140,6 +142,7 @@ class product extends My_Controller {
 			}
 			else
 			{
+				$request['img'] = implode(',',$images);
 				//call create api
 				$this->load->helper('api');
 				$api_url = $this->config->item( 'api_url');
