@@ -362,7 +362,7 @@ $config['proxy_ips'] = '';
 /* Location: ./application/config/config.php */
 $config['base_theme_url']	= 'http://localhost/dash/public/themes/';
 $config['api_url']	= 'http://localhost/ci/index.php/api/';
-$config['cdn_path']	= 'C:/Users/hp/workspace/ci/public/img/upload/';
+$config['cdn_path']	= 'F:/workspace/ci/public/img/upload/';
 $config['nav_arr'] = array(
 
     "product" => array(

@@ -104,7 +104,8 @@ class product extends My_Controller {
 					'category_id'=>$this->input->post('category'),
 					'price'=>$this->input->post('price'),
 					'description'=>$this->input->post('description'),
-					''=>$this->input->post(''),
+					'img' => array()
+					//''=>$this->input->post(''),
 			);
 			
 			//init upload lib
@@ -120,10 +121,12 @@ class product extends My_Controller {
 			//read imgs
 			for($i = 1; $i <=10; $i++)
 			{
-				if(isset($this->input->post('thumbnail' . $i)))
+			
+				if(isset($_FILES['thumbnail' . $i]))
 				{
 				  $upload_name = 'thumbnail' . $i;
 				  $img_url =  $this->uploadImg($upload_name, $errors);
+				  $request['img'][] = $img_url;
 				}
 				else
 				{
@@ -140,10 +143,12 @@ class product extends My_Controller {
 				//call create api
 				$this->load->helper('api');
 				$api_url = $this->config->item( 'api_url');
-				$request_url = 'store/detail/format/json';
+				$request_url = 'product/detail/format/json';
 				$final_url = $api_url . $request_url;
+
 				$data = my_api_request($final_url , $method = 'post', $request);
-				$resp = array('resp'=>$data);
+				
+				$resp = array('resp'=>json_decode($data));
 				$this->load->view('pages/products/create', $resp);
 			}
 			
