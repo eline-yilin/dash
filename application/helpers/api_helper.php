@@ -4,8 +4,11 @@ if ( ! function_exists('my_api_request'))
 {
     function my_api_request($url , $method = 'get', $param = array())
     {
+    	$api_url  = config_item('api_url');
+    	$final_url = $api_url . $url;
+    	
     	$ch = curl_init ();
-		curl_setopt ( $ch, CURLOPT_URL,  $url );
+		curl_setopt ( $ch, CURLOPT_URL,  $final_url );
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
 		curl_setopt ( $ch, CURLOPT_HEADER, 0 );
 		if(strtolower($method) == 'post')

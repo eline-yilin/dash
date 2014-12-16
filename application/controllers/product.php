@@ -40,12 +40,10 @@ class product extends My_Controller {
 	}
 	public function detail()
 	{
-		$this->load->helper('api');
-		$api_url = $this->config->item( 'api_url');
-		$request_url = 'store/detail/id/1/format/json';
-		$final_url = $api_url . $request_url;
+		
+		$request_url = 'store/detail/id/1/format/json';	
 		$data = array();
-		$detail = my_api_request($final_url , $method = 'get', $param = array());
+		$detail = my_api_request($request_url , $method = 'get', $param = array());
 		//$data = array();
 		//$data = my_api_request
 		$data['detail'] = json_decode($detail, true);
