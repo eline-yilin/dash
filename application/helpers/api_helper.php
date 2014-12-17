@@ -20,7 +20,7 @@ if ( ! function_exists('my_api_request'))
 		$output = curl_exec ( $ch );
 		// 释放curl句柄
 		curl_close ( $ch );
-		print_r ( $output );
+		
 		return $output;
 		//print_r ( $output );
        

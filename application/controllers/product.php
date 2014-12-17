@@ -26,11 +26,11 @@ class product extends My_Controller {
 		}
 		else
 		{
-			$data['upload_data'] = $this->upload->data();
-			$filepath = $data['upload_data']['file_name'];
+			$this->data['upload_data'] = $this->upload->data();
+			$filepath = $this->data['upload_data']['file_name'];
 			return $filepath;
 	
-			//$this->load->view('upload_success', $data);
+			//$this->load->view('upload_success', $this->data);
 		}
 	}
 	
@@ -42,23 +42,27 @@ class product extends My_Controller {
 	{
 		
 		$request_url = 'store/detail/id/1/format/json';	
-		$data = array();
+		$this->data = array();
 		$detail = my_api_request($request_url , $method = 'get', $param = array());
-		//$data = array();
-		//$data = my_api_request
-		$data['detail'] = json_decode($detail, true);
+		//$this->data = array();
+		//$this->data = my_api_request
+		$this->data['detail'] = json_decode($detail, true);
 		$this->load->view('templates/header', 
-				$data
+				$this->data
 		);
-		$this->load->view('pages/products/list', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view("pages/". $this->data['router'] . "/" . $this->data['action'], $this->data);
+		$this->load->view('templates/footer', $this->data);
 		
 	}
 	
 	public function create()
-	{
-		$data = array();
-		$data['title'] = 'Create a news item';
+	{		
+		$router = $this->router->class;
+		$action = $this->router->method;
+		
+		
+		$this->data['title'] = $this->lang->line('createproduct');
+	
 		
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -84,12 +88,11 @@ class product extends My_Controller {
 		
 		$this->form_validation->set_rules($validation_rules);
 
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/header', $this->data);
 		//invalid or first load, load page normally
 		if ($this->form_validation->run() === FALSE)
 		{
-			
-			$this->load->view('pages/products/create');
+		
 			
 		
 		}
@@ -136,7 +139,7 @@ class product extends My_Controller {
 			
 			if(count($errors) > 0)
 			{
-				$this->load->view('pages/products/create', $errors);
+				$this->data['errors'] = $errors;
 			}
 			else
 			{
@@ -147,21 +150,17 @@ class product extends My_Controller {
 				$request_url = 'product/detail/format/json';
 				$final_url = $api_url . $request_url;
 
-				$data = my_api_request($final_url , $method = 'post', $request);
+				$resp = my_api_request($final_url , $method = 'post', $request);
 				
-				$resp = array('resp'=>json_decode($data));
-				$this->load->view('pages/products/create', $resp);
+				$this->data['resp'] = json_decode($resp,true);
+				
 			}
 			
-			//$this->news_model->set_news();
-			//$this->load->view('news/success');
+			
 		}
-		
+		$this->load->view("pages/". $this->data['router'] . "/" . $this->data['action'], $this->data);
 		$this->load->view('templates/footer');
-		//$detail = my_api_request($final_url , $method = 'get', $param = array());
-		//$data = array();
-		//$data = my_api_request
-		//$data['detail'] = json_decode($detail, true);
+		
 		
 	}
 	

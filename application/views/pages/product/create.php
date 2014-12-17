@@ -96,7 +96,6 @@ echo form_open_multipart('../product/create', $attributes);
 	</div>
 
 </form>
- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <script>  
        
        function addImage()
@@ -146,7 +145,7 @@ echo form_open_multipart('../product/create', $attributes);
 
     	  }
        $(document).ready(function(){ 
-    	   var add_validator = jQuery('#product_create').validate({
+    	   var add_validator = jQuery('#<?php echo $router . "_" . $action;?>').validate({
 
     	         ignore: "",
 
@@ -160,7 +159,7 @@ echo form_open_multipart('../product/create', $attributes);
 
     	         {           
 
-    	          validator_show_errors(errorMap, errorList,'#product_create');            
+    	          validator_show_errors(errorMap, errorList,'#<?php echo $router . "_" . $action;?>');            
 
     	         },
 

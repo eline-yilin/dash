@@ -6,15 +6,16 @@
 <title>后台管理</title>
 <link rel="icon" href="<?php echo $this->config->item( 'base_theme_url');?>images/fav1.ico" />
  <!-- Latest compiled and minified CSS -->
-   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $this->config->item( 'base_theme_url');?>css/bootstrap.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="<?php echo $this->config->item( 'base_theme_url');?>css/bootstrap_theme.css">
     <link rel="stylesheet" href="<?php echo $this->config->item( 'base_theme_url');?>css/app.css"/>
      <script src="<?php echo $this->config->item( 'base_theme_url');?>js/jquery.js"></script> 
        
      <!-- Latest compiled and minified JavaScript -->
-      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+      <script src="<?php echo $this->config->item( 'base_theme_url');?>js/bootstrap.js"></script>
+      <script src="<?php echo $this->config->item( 'base_theme_url');?>js/validator.js"></script>
       <script src="<?php echo $this->config->item( 'base_theme_url');?>js/utility.js"></script>
       <script src="<?php echo $this->config->item('base_theme_url');?>js/app.js"></script>
 </head>

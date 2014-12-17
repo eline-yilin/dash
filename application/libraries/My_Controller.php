@@ -24,7 +24,7 @@ abstract class My_Controller extends CI_Controller
      */
     protected $rest_format          = null;
 
-    
+    protected $data = array();
 
     /**
      * Constructor function
@@ -35,6 +35,22 @@ abstract class My_Controller extends CI_Controller
         parent::__construct();
         $this->load->helper('api');
         $this->lang->load('general', 'chinese');
+        $this->load->library('session');
+        $this->load->helper('url');
+        $router = $this->router->class;
+        $action = $this->router->method;
+
+        
+        $this->data['router'] = $router;
+        $this->data['action'] = $action;
+        
+        $current_url = $router . '/' . $action;
+        $this->session->unset_userdata('user');
+        $current_user = $this->session->userdata('user');
+        if(!$current_user && strtolower( $current_url) != 'user/login'){
+        	redirect('../user/login', 'refresh');
+        }
+        
 
     }
 
