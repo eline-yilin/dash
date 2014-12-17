@@ -45,7 +45,7 @@ abstract class My_Controller extends CI_Controller
         $this->data['action'] = $action;
         
         $current_url = $router . '/' . $action;
-        $this->session->unset_userdata('user');
+        //$this->session->unset_userdata('user');
         $current_user = $this->session->userdata('user');
         if(!$current_user && strtolower( $current_url) != 'user/login'){
         	redirect('../user/login', 'refresh');

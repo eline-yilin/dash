@@ -1,3 +1,4 @@
+<div class='center'>
 <h2><?php echo $title;?></h2>
 
 <?php echo validation_errors(); ?>
@@ -33,6 +34,7 @@ echo form_open("../$router/$action", $attributes);
 	</div>
 
 </form>
+</div>
  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <script>  
 var validator_messages = {

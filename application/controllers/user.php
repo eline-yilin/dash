@@ -201,13 +201,14 @@ class user extends My_Controller {
 				//call login api
 				$this->load->helper('api');
 				
-				$request_url = "$router/$action/format/json";
+				$request_url =  $this->data['router'] ."/" .  $this->data['action'] . "/format/json";
 
 				$resp = my_api_request($request_url , $method = 'post', $request);
 				$resp = json_decode($resp, true);
-				if(isset($resp['error']))
+				if(!$resp || isset($resp['error']))
 				{
 					$this->data['error'] = $resp['error'];
+					
 				}
 				else{
 					$this->data['resp'] = $resp;

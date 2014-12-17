@@ -36,7 +36,22 @@ class product extends My_Controller {
 	
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$request_url = 'product/list/format/json';
+		$resp = my_api_request($request_url , $method = 'get', $param = array());
+		//$data = array();
+		//$data = my_api_request
+		if(isset($resp['img']))
+		{
+			$imgs = explode($resp['img'], ',');
+			$resp['img'] = $imgs[0];
+		
+		}
+		$data = array('items'=>json_decode($resp, true));
+		$this->load->view('templates/header',
+				$data
+		);
+		$this->load->view('pages/product/list', $data);
+		$this->load->view('templates/footer', $data);
 	}
 	public function detail()
 	{
