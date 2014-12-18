@@ -46,12 +46,12 @@ class product extends My_Controller {
 			$resp['img'] = $imgs[0];
 		
 		}
-		$data = array('items'=>json_decode($resp, true));
+		$this->data['items'] = json_decode($resp, true);
 		$this->load->view('templates/header',
-				$data
+				 $this->data
 		);
-		$this->load->view('pages/product/list', $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('pages/product/list', $this->data);
+		$this->load->view('templates/footer', $this->data);
 	}
 	public function detail()
 	{
@@ -72,9 +72,6 @@ class product extends My_Controller {
 	
 	public function create()
 	{		
-		$router = $this->router->class;
-		$action = $this->router->method;
-		
 		
 		$this->data['title'] = $this->lang->line('createproduct');
 	

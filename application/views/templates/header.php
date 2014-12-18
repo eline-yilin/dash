@@ -34,7 +34,7 @@
             $href = isset( $nav_item['href']) ? $nav_item['href'] : $key;
             $href = $this->config->item('base_url') . $href;
            ?>
-           		<li class='nav-item' id='nav-item-<?php echo $key;?>'><a href='<?php echo $href;?>'><?php echo $text;?></a></li>
+           		<li class='nav-item <?php if($router == $key) echo " active";?>' id='nav-item-<?php echo $key;?>'><a href='<?php echo $href;?>'><?php echo $text;?></a></li>
            <?php endforeach;?>
            		
           </ul>

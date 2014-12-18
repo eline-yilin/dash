@@ -60,6 +60,18 @@ echo form_open_multipart('../product/create', $attributes);
           <div class="controls">
             <textarea  class="input-xlarge" name='description' id='description'></textarea>
           </div>
+          <!-- entity-->
+          <label class="control-label"><?php echo $this->lang->line('entity'); ?></label>
+          <div class="controls">
+            <select class="input-xlarge" name='entity' id='entity'>
+              <option value=''></option>
+              <?php foreach($user['roles'] as $role):?>
+              	<?php if($role['entity_type'] == 'entity' && !$role['is_deleted']):?>
+	               <option value='<?php echo $role["entity_id"];?>'><?php echo $role["entity_name"];?></option>";
+	             <?php endif;?>
+             <?php endforeach;?>
+            </select>
+          </div>
     </div>
         
     </fieldset>
