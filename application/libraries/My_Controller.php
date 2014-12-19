@@ -26,6 +26,7 @@ abstract class My_Controller extends CI_Controller
 
     protected $data = array();
 
+
     /**
      * Constructor function
      * @todo Document more please.
@@ -48,7 +49,9 @@ abstract class My_Controller extends CI_Controller
         //$this->session->unset_userdata('user');
         $current_user = $this->session->userdata('user');
         
-        if(!$current_user && strtolower( $current_url) != 'user/login'){
+        if(!$current_user 
+        		&& strtolower( $current_url) != 'user/login'  
+        		&& strtolower( $current_url) != 'user/register'){
         	redirect('../user/login', 'refresh');
         }
         else

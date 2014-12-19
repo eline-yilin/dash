@@ -224,6 +224,85 @@ class user extends My_Controller {
 		
 	}
 	
+	public function register()
+	{
+		$this->data['title'] = $this->lang->line('register');
+	
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+	
+		$validation_rules = array(
+				array(
+						'field'   => 'username',
+						'label'   => 'username',
+						'rules'   => 'required'
+				),
+				array(
+						'field'   => 'password',
+						'label'   => 'password',
+						'rules'   => 'required'
+				),
+				/* array(
+				 'field'   => 'password',
+						'label'   => 'Password',
+						'rules'   => 'required'
+				),
+		array(
+				'field'   => 'passconf',
+				'label'   => 'Password Confirmation',
+				'rules'   => 'required'
+		), */
+	
+		);
+	
+		$this->form_validation->set_rules($validation_rules);
+	
+		$this->load->view('templates/header', $this->data);
+		//invalid or first load, load page normally
+		if ($this->form_validation->run() === FALSE)
+		{
+				
+		}
+		//process upload
+		else
+		{
+			//product entity
+			$request = array(
+					'name'=>$this->input->post('name'),
+					'email'=>$this->input->post('email'),
+					'phone'=>$this->input->post('phone'),
+					'password'=>$this->input->post('password')
+					//''=>$this->input->post(''),
+			);
+				
+	
+			//call login api
+			$this->load->helper('api');
+	
+			$request_url =  $this->data['router'] ."/" .  $this->data['action'] . "/format/json";
+	
+			$resp = my_api_request($request_url , $method = 'post', $request);
+			$resp = json_decode($resp, true);
+			if(!$resp || isset($resp['error']))
+			{
+				$this->data['error'] = $resp['error'];
+					
+			}
+			else{
+				$this->data['resp'] = $resp;
+				$this->session->set_userdata('user', $resp);
+				redirect('../welcome', 'refresh');
+					
+			}
+	
+	
+		}
+		$this->load->view("pages/" . $this->data['router'] . "/" . $this->data['action'] , $this->data);
+		$this->load->view('templates/footer');
+	
+	}
+	
+	
 }
 
 /* End of file welcome.php */
