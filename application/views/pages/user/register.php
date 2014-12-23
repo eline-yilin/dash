@@ -1,5 +1,5 @@
 <div class='center'>
-<h2><?php echo $title;?><span style='font-size:0.6em;padding-left:1%;'><a href='../user/register'><?php echo $this->lang->line('register'); ?> >></a></<span></h2>
+<h2><?php echo $title;?><span style='font-size:0.6em;padding-left:1%;'><a href='../user/login'><?php echo $this->lang->line('login'); ?> >></a></<span></h2>
 
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
@@ -15,9 +15,19 @@ echo form_open("../$router/$action", $attributes);
     
     <div class="control-group">
           <!-- Text input-->
-          <label class="control-label" for="username"><?php echo $this->lang->line('username'); ?></label>
+          <label class="control-label" for="name"><?php echo $this->lang->line('name'); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge required" name='username' id='username'  value=''>
+            <input type="text"  class="input-xlarge required" name='name' id='name'  value=''>
+          </div>
+           <!-- Text input-->
+          <label class="control-label" for="email"><?php echo $this->lang->line('email'); ?></label>
+          <div class="controls">
+            <input type="text"  class="input-xlarge required" name='email' id='"email'  value=''>
+          </div>
+           <!-- Text input-->
+          <label class="control-label" for="phone"><?php echo $this->lang->line('phone'); ?></label>
+          <div class="controls">
+            <input type="text"  class="input-xlarge required" name='phone' id='phone'  value=''>
           </div>
           <!-- category-->
 		  <label class="control-label" for="phone"><?php echo $this->lang->line('password'); ?></label>
@@ -39,9 +49,9 @@ echo form_open("../$router/$action", $attributes);
 <script>  
 var validator_messages = {
 
-        'username': {
+        'name': {
 
-            required: "<?php echo $this->lang->line('required_error') . $this->lang->line('username');?>"
+            required: "<?php echo $this->lang->line('required_error') . $this->lang->line('name');?>"
         },
         'password': {
 

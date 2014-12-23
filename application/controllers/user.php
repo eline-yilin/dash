@@ -46,22 +46,22 @@ class user extends My_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 	
-		$validation_rules = array(
-				array(
-						'field'   => 'productname',
-						'label'   => 'productname',
-						'rules'   => 'required'
+		$validation_rules = array (
+				array (
+						'field' => 'name',
+						'label' => 'name',
+						'rules' => 'required' 
 				),
-				/* array(
-				 'field'   => 'password',
-						'label'   => 'Password',
-						'rules'   => 'required'
+				array (
+						'field' => 'password',
+						'label' => 'password',
+						'rules' => 'required' 
 				),
-		array(
-				'field'   => 'passconf',
-				'label'   => 'Password Confirmation',
-				'rules'   => 'required'
-		), */
+				array (
+						'field' => 'passconf',
+						'label' => 'Password Confirmation',
+						'rules' => 'required' 
+				), 
 	
 		);
 	
@@ -233,8 +233,8 @@ class user extends My_Controller {
 	
 		$validation_rules = array(
 				array(
-						'field'   => 'username',
-						'label'   => 'username',
+						'field'   => 'name',
+						'label'   => 'name',
 						'rules'   => 'required'
 				),
 				array(
@@ -261,7 +261,7 @@ class user extends My_Controller {
 		//invalid or first load, load page normally
 		if ($this->form_validation->run() === FALSE)
 		{
-				
+			
 		}
 		//process upload
 		else
@@ -289,6 +289,7 @@ class user extends My_Controller {
 					
 			}
 			else{
+				var_dump($resp);die;
 				$this->data['resp'] = $resp;
 				$this->session->set_userdata('user', $resp);
 				redirect('../welcome', 'refresh');
