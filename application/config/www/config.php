@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/dash/index.php/';
+$config['base_url']	= 'http://120.24.73.33:8080/dash/index.php/';
 
 /*
 |--------------------------------------------------------------------------
@@ -360,11 +360,9 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
-$config['base_theme_url']	= 'http://localhost/dash/public/themes/';
-$config['api_url']	= 'http://localhost/ci/index.php/api/';
-$config['cdn_path']	=  'D:/cdn/';//'F:/workspace/ci/public/img/upload/';
-$config['api_username']	=  'dash_super';
-$config['api_password']	=  'ama:;5IyC9V]VlK';
+$config['base_theme_url']	= 'http://120.24.73.33:8080/dash/public/themes/';
+$config['api_url']	= 'http://120.24.73.33:8080/ci/index.php/api/';
+$config['cdn_path']	=  '/var/www/ci/public/img/upload/';//'F:/workspace/ci/public/img/upload/';
 $config['nav_arr'] = array(
 
     "product" => array(
