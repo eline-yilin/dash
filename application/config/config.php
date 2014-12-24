@@ -363,9 +363,11 @@ $config['proxy_ips'] = '';
 $config['base_theme_url']	= 'http://localhost/dash/public/themes/';
 $config['api_url']	= 'http://localhost/ci/index.php/api/';
 $config['cdn_path']	=  'D:/cdn/';//'F:/workspace/ci/public/img/upload/';
+$config['api_username']	=  'dash_super';
+$config['api_password']	=  'ama:;5IyC9V]VlK';
 $config['nav_arr'] = array(
 
-    "product" => array(
+    	"product" => array(
     			'text'=>"产品管理"
     			),
 		"store" => array(
