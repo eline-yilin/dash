@@ -7,6 +7,7 @@ if ( ! function_exists('my_api_request'))
     	$CI =& get_instance();
     	$api_url  = config_item('api_url');
     	$final_url = $api_url . $url;
+
     	$username = config_item('api_username');
     	$password = config_item('api_password');
     	$current_user = $CI->session->userdata('user');
@@ -36,6 +37,7 @@ if ( ! function_exists('my_api_request'))
     			break;
 			default: break;
 		}
+		
 		
 		curl_setopt ( $ch, CURLOPT_URL,  $final_url );
 		// 执行并获取HTML文档内容

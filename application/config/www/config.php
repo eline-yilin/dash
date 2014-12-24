@@ -363,6 +363,8 @@ $config['proxy_ips'] = '';
 $config['base_theme_url']	= 'http://120.24.73.33:8080/dash/public/themes/';
 $config['api_url']	= 'http://120.24.73.33:8080/ci/index.php/api/';
 $config['cdn_path']	=  '/var/www/ci/public/img/upload/';//'F:/workspace/ci/public/img/upload/';
+$config['api_username']	=  'dash_super';
+$config['api_password']	=  'ama:;5IyC9V]VlK';
 $config['nav_arr'] = array(
 
     "product" => array(

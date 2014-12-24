@@ -37,6 +37,7 @@ class product extends My_Controller {
 	public function index()
 	{
 		$request_url = 'product/list/format/json';
+		
 		$resp = my_api_request($request_url , $method = 'get', $param = array());
 		$resp = json_decode($resp,true);
 		if(isset($resp['error']))
@@ -165,12 +166,10 @@ class product extends My_Controller {
 			{
 				$request['img'] = implode(',',$images);
 				//call create api
-				$this->load->helper('api');
-				$api_url = $this->config->item( 'api_url');
-				$request_url = 'product/detail/format/json';
-				$final_url = $api_url . $request_url;
 
-				$resp = my_api_request($final_url , $method = 'post', $request);
+				$request_url = 'product/detail/format/json';
+
+				$resp = my_api_request($request_url , $method = 'post', $request);
 				
 				$this->data['resp'] = json_decode($resp,true);
 				
