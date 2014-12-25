@@ -289,7 +289,7 @@ class user extends My_Controller {
 					
 			}
 			else{
-				var_dump($resp);die;
+				
 				$this->data['resp'] = $resp;
 				$this->session->set_userdata('user', $resp);
 				redirect('../welcome', 'refresh');
