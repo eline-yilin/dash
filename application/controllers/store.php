@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require APPPATH.'/libraries/My_Controller.php';
-class product extends My_Controller {
+class store extends My_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -17,156 +17,156 @@ class product extends My_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	
-	
-	
 	public function index()
 	{
-		$request_url = 'product/list/format/json';
-		
+		$request_url = 'store/list/format/json';
 		$resp = my_api_request($request_url , $method = 'get', $param = array());
 		$resp = json_decode($resp,true);
-		if(isset($resp['error']))
-		{
-			$this->data['error'] = $resp['error'];
+		if($resp){
+			if(isset($resp['error']))
+			{
+				$this->data['error'] = $resp['error'];
+			}
+		    else {
+		    	foreach($resp as $item){
+		    		if(isset($item['img']) && $item['img'] )
+		    		{
+		    			$imgs = explode($item['img'], ',');
+		    			$item['img'] = $imgs[0];
+		    		
+		    		}
+		    	}
+		    	$this->data['items'] = $resp;
+		    }
 		}
-	    else {
-	    	foreach($resp as $item){
-	    		if(isset($item['img']))
-	    		{
-	    			$imgs = explode($item['img'], ',');
-	    			$item['img'] = $imgs[0];
-	    		
-	    		}
-	    	}
-	    	$this->data['items'] = $resp ;
-	    }
-	    
-		$this->load->view('templates/header',
-				 $this->data
+		
+		$this->load->view('templates/header', 
+				$this->data
 		);
-		$this->load->view('pages/product/list', $this->data);
+	
+		$this->load->view('pages/store/list', $this->data);
 		$this->load->view('templates/footer', $this->data);
 	}
 	public function detail()
 	{
-		
-		$request_url = 'store/detail/id/1/format/json';	
-		$this->data = array();
-		$detail = my_api_request($request_url , $method = 'get', $param = array());
-		//$this->data = array();
-		//$this->data = my_api_request
-		$this->data['detail'] = json_decode($detail, true);
+		$request_url = 'store/detail/id/1/format/json';
+		$data = my_api_request($request_url , $method = 'get', $param = array());
+		//$data = array();
+		//$data = my_api_request
+		$data = json_decode($data, true);
 		$this->load->view('templates/header', 
-				$this->data
+				array(
+						'detail'=>$data
+						
+				)
 		);
-		$this->load->view("pages/". $this->data['router'] . "/" . $this->data['action'], $this->data);
-		$this->load->view('templates/footer', $this->data);
+		$this->load->view('pages/product/detail', $data);
+		$this->load->view('templates/footer', $data);
 		
 	}
-	
+
 	public function create()
-	{		
-		
-		$this->data['title'] = $this->lang->line('createproduct');
+	{
 	
-		
+		$this->data['title'] = $this->lang->line('create') . $this->lang->line('entity');
+	
+	
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		
+	
 		$validation_rules = array(
 				array(
-						'field'   => 'productname',
-						'label'   => 'productname',
+						'field'   => 'entityname',
+						'label'   => 'entityname',
 						'rules'   => 'required'
 				),
 				/* array(
-						'field'   => 'password',
+				 'field'   => 'password',
 						'label'   => 'Password',
 						'rules'   => 'required'
 				),
-				array(
-						'field'   => 'passconf',
-						'label'   => 'Password Confirmation',
-						'rules'   => 'required'
-				), */
-				
+		array(
+				'field'   => 'passconf',
+				'label'   => 'Password Confirmation',
+				'rules'   => 'required'
+		), */
+	
 		);
-		
+	
 		$this->form_validation->set_rules($validation_rules);
-
+	
 		$this->load->view('templates/header', $this->data);
 		//invalid or first load, load page normally
 		if ($this->form_validation->run() === FALSE)
 		{
-		
-			
-		
+	
+				
+	
 		}
 		//process upload
 		else
 		{
 			//product entity
 			$request = array(
-					'name'=>$this->input->post('productname'),
+					'name'=>$this->input->post('entityname'),
 					'category_id'=>$this->input->post('category'),
-					'price'=>$this->input->post('price'),
+					//'price'=>$this->input->post('price'),
 					'description'=>$this->input->post('description'),
-					
+						
 					//''=>$this->input->post(''),
 			);
-			
+				
 			//init upload lib
-			$upload_config['upload_path'] =  $this->config->item( 'cdn_path') . 'product/';
+			$upload_config['upload_path'] =  $this->config->item( 'cdn_path') . 'entity/';
 			$upload_config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$upload_config['remove_spaces']  = TRUE;
 			$upload_config['max_size']	= '1000';
 			$upload_config['max_width']  = '1024';
 			$upload_config['max_height']  = '768';
-			
+				
 			$this->load->library('upload', $upload_config);
 			$errors = array();
 			$images = array();
 			//read imgs
 			for($i = 1; $i <=10; $i++)
 			{
-			
-				if(isset($_FILES['thumbnail' . $i]))
-				{
-				  $upload_name = 'thumbnail' . $i;
-				  $img_url =  $this->uploadImg($upload_name, $errors);
-				  $images[] = $img_url;
-				  
-				}
-				else
-				{
-					break;
-				}
+				
+			if(isset($_FILES['thumbnail' . $i]))
+			{
+			$upload_name = 'thumbnail' . $i;
+					$img_url =  $this->uploadImg($upload_name, $errors);
+					$images[] = $img_url;
+	
 			}
-			
+			else
+			{
+			break;
+			}
+			}
+				
 			if(count($errors) > 0)
 			{
-				$this->data['errors'] = $errors;
+			$this->data['errors'] = $errors;
 			}
 			else
 			{
 				$request['img'] = implode(',',$images);
 				//call create api
-
-				$request_url = 'product/detail/format/json';
-
-				$resp = my_api_request($request_url , $method = 'post', $request);
-				
-				$this->data['resp'] = json_decode($resp,true);
+	
+						$request_url = 'store/detail/format/json';
+	
+						$resp = my_api_request($request_url , $method = 'post', $request);
+	
+						$this->data['resp'] = json_decode($resp,true);
+	
+			}
+		
 				
 			}
-			
-			
-		}
-		$this->load->view("pages/". $this->data['router'] . "/" . $this->data['action'], $this->data);
-		$this->load->view('templates/footer');
-		
-		
+			$this->load->view("pages/". $this->data['router'] . "/" . $this->data['action'], $this->data);
+			$this->load->view('templates/footer');
+	
+	
 	}
 	
 }
