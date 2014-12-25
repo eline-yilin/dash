@@ -31,6 +31,10 @@ if ( ! function_exists('my_api_request'))
 				
 				break;
     		case 'post':
+    			if(!isset($param['user_id'])){
+    				$param['user_id'] = $user_id;
+    			}
+    			
     			curl_setopt($ch, CURLOPT_POST, 1);
     			curl_setopt($ch, CURLOPT_POSTFIELDS,$param);
     			break;
@@ -40,11 +44,10 @@ if ( ! function_exists('my_api_request'))
 		curl_setopt ( $ch, CURLOPT_URL,  $final_url );
 		// 执行并获取HTML文档内容
 		$output = curl_exec ( $ch );
+		//var_dump($output);
 		// 释放curl句柄
 		curl_close ( $ch );
-		
 		return $output;
-		//print_r ( $output );
        
     }   
 }
