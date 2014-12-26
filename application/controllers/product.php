@@ -112,6 +112,7 @@ class product extends My_Controller {
 					'category_id'=>$this->input->post('category'),
 					'price'=>$this->input->post('price'),
 					'description'=>$this->input->post('description'),
+					'entity_id'=>$this->input->post('entity')
 					
 					//''=>$this->input->post(''),
 			);
@@ -156,7 +157,6 @@ class product extends My_Controller {
 				$request_url = 'product/detail/format/json';
 
 				$resp = my_api_request($request_url , $method = 'post', $request);
-				
 				$this->data['resp'] = json_decode($resp,true);
 				
 			}

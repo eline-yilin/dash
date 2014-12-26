@@ -75,30 +75,7 @@ echo form_open_multipart('../product/create', $attributes);
     </div>
         
     </fieldset>
-    <!-- entity Info-->
-    <fieldset style='display:none;'>
-      <div id="legend" class="">
-        <legend class=""><?php echo $this->lang->line('displayinfo'); ?></legend>
-    <div class="control-group">
-          <!-- entity-->
-          <label class="control-label"><?php echo $this->lang->line('entity'); ?></label>
-          <div class="controls">
-            <select class="input-xlarge" name='entity' id='entity'>
-              <option value=''></option>
-              {#data.entities}
-              <option value='{id}'>{name}</option>";
-              {/data.entities}
-            </select>
-          </div>
-          <!-- weight-->
-			<label class="control-label" for="weight"><?php echo $this->lang->line('priority'); ?></label>
-          <div class="controls">
-            <input type="text"  class="input-xlarge" name='weight' id='weight' value={item.weight}>
-          </div>
-          
-    </div>
-        
-    </fieldset>
+
     <div class="control-group">
           <!-- Button -->
           <div class="controls">
