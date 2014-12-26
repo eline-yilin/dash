@@ -36,7 +36,17 @@ class user extends My_Controller {
 	
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('templates/header', 
+				$this->data
+		);
+	
+		$this->load->view('pages/user/list', $this->data);
+		$this->load->view('templates/footer', $this->data);
+	}
+	public function logout()
+	{
+		$this->session->unset_userdata('user');
+		redirect('../welcome', 'refresh');
 	}
 	public function create()
 	{

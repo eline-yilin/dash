@@ -1,16 +1,20 @@
 <div class="container-fluid">
 		<div class='subnav'>
 			<ul class="nav navbar nav-pills">
-			  <li role="presentation" class="create"><a href="<?php echo $this->config->item('base_url');?>product/create/"><?php echo $this->lang->line('createproduct'); ?></a></li>
+			  <li role="presentation" class="create"><a href="<?php echo $this->config->item('base_url');?>user/login/"><?php echo $this->lang->line('login'); ?></a></li>
+			  <li role="presentation" class="create"><a href="<?php echo $this->config->item('base_url');?>user/register/"><?php echo $this->lang->line('register'); ?></a></li>
+			  <li role="presentation" class="create"><a href="<?php echo $this->config->item('base_url');?>user/logout/"><?php echo $this->lang->line('logout'); ?></a></li>
+			
 			</ul>
 		</div>
 	    <div class='product-list'>
 	    <?php 
-	    if($error){
+	    if(isset($error)){
 	    	//var_dump($error);
 	    }
-	    else{ foreach($items as $product):?>
-	       <div class="panel panel-warning">
+	    else if(0){
+	    foreach($items as $product):?>
+	       <div class="list-item panel panel-warning">
 	            <div class="panel-heading"><?php echo $product['name']?></div>
 	       		<div class="panel-body">
 				    <div class = 'row'>
@@ -18,7 +22,7 @@
 				    	<img style='max-width:100%' src="<?php echo isset($product['img']) ?
 				    	 $this->config->item( 'cdn_url_upload_img') .'product/' .  $product['img'] 
 				    	: '';?>"></div>
-				    	<div class=" col-md-8 col-sm-8 col-xs-8 ">
+				    	<div class=" col-md-8 col-sm-8 col-xs-8 list-main">
 					    	  <div class = 'row price'>
 						    	  	<div class=" col-md-2 col-sm-3 col-xs-4">
 						    	  		<span class="label label-primary">
@@ -52,7 +56,7 @@
 				    	</div>
 				    </div>
 				</div>
- 		   		<div class="panel-footer">Panel footer</div>
+ 		   		<div class="panel-footer">邮费根据地址不同 敬请自理。需要请微信留言。谢谢。</div>
 	       </div>
 	       <?php endforeach;}?>
 	    </div>

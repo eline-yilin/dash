@@ -2,7 +2,7 @@
 
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
-<?php if(isset($upload_data)) var_dump($upload_data);?>
+<?php //if(isset($upload_data)) var_dump($upload_data);?>
 <?php 
 $attributes = array('class' => 'product_create', 'id' => 'product_create');
 echo form_open_multipart('../product/create', $attributes);

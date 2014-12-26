@@ -16,7 +16,7 @@ body
 }
 .navbar li a:hover,.navbar li.active a
 {
-	background-color: #ee7337;
+	background-color: #ee7337 !important;
     color: #fff;
 }
 .nav-pills > li{margin:0px 2%;}
@@ -30,7 +30,6 @@ body
 }
 .nav-pills > li > a {
     border-radius: 4px;
-    background-color: #eee;
     color: #337ab7;
     background-color: #eab020;
     color: #fff;
@@ -83,3 +82,4 @@ body
 .panel-body .description .row{margin:3px 0px;}
 .product-item .panel-body .img img{width:100%;}
 .controls {margin-bottom:8px;}
+.subnav{margin-top:20px;padding:5px 10px;font-size:0.8em;}

@@ -1,4 +1,11 @@
 <div class="container-fluid">
+		<div class='subnav'>
+			<ul class="nav navbar nav-pills">
+			  <li role="presentation" class="create"><a href="<?php echo $this->config->item('base_url');?>store/create/">
+			  	<?php echo $this->lang->line('create') . $this->lang->line('entity'); ?>
+			  </a></li>
+			</ul>
+		</div>
 	    <div class='product-list'>
 	    <?php 
 	    if(isset($error)){
