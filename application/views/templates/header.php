@@ -39,7 +39,21 @@
            			<a href='<?php echo $href;?>'><?php echo $text;?></a>
            		</li>
            <?php endforeach;?>
-           		
+           		<li role="presentation" class="dropdown operation pull-right" >
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				       <span class='pull-left' style='margin-right:3px;'><i class="icon-white icon-user"></i></span> 
+				        <span class='pull-left' style='padding-top:12px;' >
+				      		 <span class="icon-bar"></span>
+				      		  <span class="icon-bar"></span>
+				      		   <span class="icon-bar"></span>
+				      	 </span>
+				      	<span class="caret"></span>
+				      	
+				    </a>
+				    <ul class="dropdown-menu" role="menu">
+				     <li>1</li>
+				    </ul>
+				  </li>
           </ul>
           
         </div><!--/.nav-collapse -->
@@ -47,6 +61,5 @@
     </div>
     <div class='page-content'>
     	
-    
     
  	

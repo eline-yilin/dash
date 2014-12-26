@@ -1,6 +1,8 @@
 @CHARSET "UTF-8";
 body
 {font-size:22px;}
+.clear{clear:both;}
+.hidden{display:none;}
 .my-circle{border-radius:50%;}
 .my-red{background:red;color:#fff;}
 .my-orange{background:#ee7337;color:#fff;}
@@ -31,7 +33,7 @@ body
 .nav-pills > li > a {
     border-radius: 4px;
     color: #337ab7;
-    background-color: #eab020;
+    background-color: #eab020 !important;
     color: #fff;
     
 }
@@ -83,3 +85,26 @@ body
 .product-item .panel-body .img img{width:100%;}
 .controls {margin-bottom:8px;}
 .subnav{margin-top:20px;padding:5px 10px;font-size:0.8em;}
+.icon-white{
+	background-image: url("../images/glyphicons-halflings-white.png");
+	display: inline-block;
+width: 14px;
+height: 14px;
+margin-top: 1px;
+line-height: 14px;
+background-position: 14px 14px;
+background-repeat: no-repeat;
+}
+.icon-user {
+background-position: -168px 0;
+}
+.icon-bar {
+    background-color: #fff;
+      border-radius: 1px;
+    display: block;
+    height: 2px;
+    width: 22px;
+    margin:0px 3px 4px;
+    
+
+}
