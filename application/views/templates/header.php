@@ -40,9 +40,11 @@
            		</li>
            <?php endforeach;?>
            		<li role="presentation" class="dropdown operation pull-right" >
+           		<?php if(isset($user) && $user) :?>
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				       <span  class='pull-left' style='margin-right:5px;margin-top:8px;font-size:0.7em;font-weight:normal;'><?php echo $user['name'];?></span>
 				       <span class='pull-left' style='margin-right:3px;'><i class="icon-white icon-user"></i></span> 
-				        <span class='pull-left' style='padding-top:12px;' >
+				        <span class='pull-left' style='padding-top:12px;display:none;' >
 				      		 <span class="icon-bar"></span>
 				      		  <span class="icon-bar"></span>
 				      		   <span class="icon-bar"></span>
@@ -50,9 +52,15 @@
 				      	<span class="caret"></span>
 				      	
 				    </a>
-				    <ul class="dropdown-menu" role="menu">
-				     <li>1</li>
+				    <ul class="dropdown-menu dropdown-ul" role="menu">
+				     	  <li role="presentation" class="create"><a href="<?php echo $this->config->item('base_url');?>user/logout/"><?php echo $this->lang->line('logout'); ?></a></li>
 				    </ul>
+				    <?php else :?>
+				    <div class='account-operations'>
+				    	<a href='../user/login'><?php echo $this->lang->line('login'); ?> </a> | 
+				    	<a href='../user/register'><?php echo $this->lang->line('register'); ?> </a>
+				    </div>
+				    <?php endif;?>
 				  </li>
           </ul>
           

@@ -37,6 +37,7 @@ body
     color: #fff;
     
 }
+
 .nav > li > a {
     display: block;
     padding: 10px 15px;
@@ -64,10 +65,11 @@ body
 	position:fixed;
 	top:0px;
 }
+
 .page-content
 {
 	position:relative;
-	top:46px;
+	top:65px;
 	padding-bottom:4%;
 }
 .my-bg {
@@ -84,7 +86,7 @@ body
 .panel-body .description .row{margin:3px 0px;}
 .product-item .panel-body .img img{width:100%;}
 .controls {margin-bottom:8px;}
-.subnav{margin-top:20px;padding:5px 10px;font-size:0.8em;}
+.subnav{padding:5px 10px;font-size:0.8em;}
 .icon-white{
 	background-image: url("../images/glyphicons-halflings-white.png");
 	display: inline-block;
@@ -105,6 +107,25 @@ background-position: -168px 0;
     height: 2px;
     width: 22px;
     margin:0px 3px 4px;
+}
+.account-operations
+{
+	margin-top:10px;
+}
+.navbar li .account-operations a:hover{
+	background-color: transparent !important;
+	color:#428bca !important;
+}
+.navbar li .account-operations a{}
+.dropdown-ul > li > a {
+    border-radius: 4px;
+    color: #337ab7;
+    background-color: #eab020 !important;
+    color: #fff;
     
-
+}
+.dropdown-menu.dropdown-ul{margin:0px;}
+.dropdown-menu.dropdown-ul  li > a:hover{
+ 	background: #ee7337 !important;
+    color: #fff !important;
 }
