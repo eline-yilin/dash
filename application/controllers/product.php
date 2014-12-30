@@ -141,7 +141,7 @@ class product extends My_Controller {
 				}
 				else
 				{
-					break;
+					continue;//break;
 				}
 			}
 			

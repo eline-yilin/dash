@@ -19,15 +19,17 @@ echo form_open_multipart('../product/create', $attributes);
           <!-- img-->
 			<div class="controls hidden imgRow" id="imgTemplate">
           		 <input type="file",  class="input-xlarge"  id='thumbnail'>
+          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i><?php echo $this->lang->line('createproduct') ; ?> </button>
          	 </div>
-          <div class="controls imgRow">
+          <div class="controls imgRow" id='thumbnailContainer1'>
             <input type="file", name="thumbnail1"  class="input-xlarge"  id='thumbnail1'>
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeImage(1);'><i class="icon-white icon-remove"></i><?php echo $this->lang->line('createproduct') ; ?> </button>
           </div>
  		  <label class="control-label label-warning" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
  					<!-- Button -->
           <div class="controls">
             <button type='button' id='addImg' onclick="javascript:addImage();"  class="btn btn-success">
-            	<i class="icon-white icon-plus-sign"></i><?php echo $this->lang->line('addImg'); ?>
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addImg'); ?>
             </button>
           </div>
           
@@ -86,13 +88,31 @@ echo form_open_multipart('../product/create', $attributes);
 
 </form>
 <script>  
-       
+       var avail_img_index = [];
        function addImage()
         {
           var index  = $('div.imgRow').length;
-          $("#imgTemplate").clone().removeClass('hidden').insertAfter("div.imgRow:last");
-          $("div.imgRow:last").find('input').attr('name','thumbnail' +　index).attr('id','thumbnail' +　index );
+         
+              if(avail_img_index.length)
+              {
+            	  index = avail_img_index[0];
+            	  avail_img_index.splice(0, 1);
+              }
+          if(index < 10)
+          {
+	          $("#imgTemplate").clone().removeClass('hidden').attr('id','thumbnailContainer' +　index ).insertAfter("div.imgRow:last");
+	          $("div.imgRow:last").find('input').attr('name','thumbnail' +　index).attr('id','thumbnail' +　index );
+	          $('#thumbnailContainer' +　index  + ' .btn-danger').click(function(){
+					var id = $(this).parents('.imgRow').attr('id');
+					var index = id.substring(18);
+					removeImage(index);
+	             });
+          }
         }
+       function removeImage(index){
+    	   $('#thumbnailContainer' +　index).fadeOut().remove();
+    	   avail_img_index.push (index);
+       }
        var validator_messages = {
 
     	         'price': {
@@ -106,7 +126,7 @@ echo form_open_multipart('../product/create', $attributes);
        };
        function validator_show_errors(errorMap,errorList, form){
 
-    	   jQuery('label.ton-error').remove();
+    	   jQuery('label.my-error').remove();
     	  
     	   for (var i in errorMap) {
 
