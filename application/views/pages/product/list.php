@@ -53,7 +53,7 @@
 				    </div>
 				</div>
  		   		<div class="panel-footer">
- 		   			<a href = '../product/update/'  class="btn btn-success btn-mini"><i class="icon-white icon-pencil"></i> <?php echo $this->lang->line('edit') ; ?> </a>
+ 		   			<a href = 'product/update/id/<?php echo $product['id'] ;?>'  class="btn btn-success btn-mini"><i class="icon-white icon-pencil"></i> <?php echo $this->lang->line('edit') ; ?> </a>
  		   		</div>
 	       </div>
 	       <?php endforeach;}?>
