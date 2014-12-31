@@ -16,6 +16,7 @@ $lang['submit']			= "提交";
 $lang['login']			= "登录";
 $lang['createproduct']			= "新建商品";
 $lang['create']			= "新建";
+$lang['edit']			= "编辑";
 $lang['username']			= "手机或邮箱";
 $lang['password']			= "密码";
 $lang['register']			= "注册";

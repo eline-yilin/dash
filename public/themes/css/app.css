@@ -142,3 +142,6 @@ background-position: -144px -144px;
 .imgRow input[type=file] {
  display: inline-block; 
 }
+.icon-pencil {
+background-position: 0 -72px;
+}
