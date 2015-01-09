@@ -32,7 +32,7 @@ class product extends My_Controller {
 		}
 	    else {
 	    	foreach($resp as $item){
-	    		if(isset($item['img']))
+	    		if(isset($item['img']) && $item['img'])
 	    		{
 	    			$imgs = explode($item['img'], ',');
 	    			$item['img'] = $imgs[0];
@@ -47,22 +47,6 @@ class product extends My_Controller {
 		);
 		$this->load->view('pages/product/list', $this->data);
 		$this->load->view('templates/footer', $this->data);
-	}
-	public function detail()
-	{
-		
-		$request_url = 'store/detail/id/1/format/json';	
-		$this->data = array();
-		$detail = my_api_request($request_url , $method = 'get', $param = array());
-		//$this->data = array();
-		//$this->data = my_api_request
-		$this->data['detail'] = json_decode($detail, true);
-		$this->load->view('templates/header', 
-				$this->data
-		);
-		$this->load->view("pages/". $this->data['router'] . "/" . $this->data['action'], $this->data);
-		$this->load->view('templates/footer', $this->data);
-		
 	}
 	
 	public function create()
@@ -169,15 +153,24 @@ class product extends My_Controller {
 		
 	}
 	
-	public function update()
+	public function update($id_name,$id_val)
 	{
-	
+
 		$this->data['title'] = $this->lang->line('edit')  . $this->lang->line('product');
 	
 	
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 	
+		$request_url = 'product/detail/id/' . $id_val . '/format/json';
+		
+		$detail = my_api_request($request_url , $method = 'get', $param = array());
+		
+		//$this->data = array();
+		//$this->data = my_api_request
+		$this->data['detail'] = json_decode($detail, true);
+		
+		
 		$validation_rules = array(
 				array(
 						'field'   => 'productname',
@@ -233,7 +226,7 @@ class product extends My_Controller {
 			$errors = array();
 			$images = array();
 			//read imgs
-			for($i = 1; $i <=10; $i++)
+			for($i = 1; $i < 0; $i++)
 			{
 				
 			if(isset($_FILES['thumbnail' . $i]))
@@ -251,24 +244,25 @@ class product extends My_Controller {
 					
 				if(count($errors) > 0)
 				{
-				$this->data['errors'] = $errors;
+					$this->data['errors'] = $errors;
 				}
 				else
-			{
-				$request['img'] = implode(',',$images);
-				//call create api
+				{
+					
+					$request['img'] = implode(',',$images);
+					//call create api
+					$request_url = 'product/detail/id/' . $id_val . '/format/json';
+
+					$resp = my_api_request($request_url , $method = 'put', $request);
 	
-				$request_url = 'product/detail/format/json';
-	
-				$resp = my_api_request($request_url , $method = 'post', $request);
-				$this->data['resp'] = json_decode($resp,true);
+					$this->data['resp'] = json_decode($resp,true);
 	
 				}
 					
 					
 				}
 				$this->load->view("pages/". $this->data['router'] . "/" . $this->data['action'], $this->data);
-						$this->load->view('templates/footer');
+				$this->load->view('templates/footer');
 	
 	
 	}

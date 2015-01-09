@@ -21,12 +21,14 @@ if ( ! function_exists('my_api_request'))
 		curl_setopt($ch, CURLOPT_USERPWD, $username . ':' . $password);
 		 
 		$method = strtolower($method);
+		if(!isset($param['user_id'])){
+			$param['user_id'] = $user_id;
+		}
 		switch ($method){
 			case 'get':
-				$final_url .= "?user_id=$user_id";
-				if(count($param))
+				if(http_build_query($param))
 				{
-					$final_url .= '&' . http_build_query($param) ;
+					$final_url .= '?' . http_build_query($param) ;
 				}
 				
 				break;
@@ -38,13 +40,24 @@ if ( ! function_exists('my_api_request'))
     			curl_setopt($ch, CURLOPT_POST, 1);
     			curl_setopt($ch, CURLOPT_POSTFIELDS,$param);
     			break;
+    		case 'put':
+    			$query = http_build_query($param);
+    			
+    			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($param));
+    			break;
+    		case 'delete':
+    			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+    			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($param));
+    			break;	
+    			 
 			default: break;
 		}
 		
 		curl_setopt ( $ch, CURLOPT_URL,  $final_url );
 		// 执行并获取HTML文档内容
 		$output = curl_exec ( $ch );
-		//var_dump($output);
+
 		// 释放curl句柄
 		curl_close ( $ch );
 		return $output;

@@ -19,11 +19,14 @@ echo form_open_multipart('../product/create', $attributes);
           <!-- img-->
 			<div class="controls hidden imgRow" id="imgTemplate">
           		 <input type="file",  class="input-xlarge"  id='thumbnail'>
-          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i><?php echo $this->lang->line('createproduct') ; ?> </button>
+          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
+          		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
          	 </div>
           <div class="controls imgRow" id='thumbnailContainer1'>
             <input type="file", name="thumbnail1"  class="input-xlarge"  id='thumbnail1'>
-            <button type='button' class="btn btn-danger btn-mini" onclick='removeImage(1);'><i class="icon-white icon-remove"></i><?php echo $this->lang->line('createproduct') ; ?> </button>
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeImage(1);'><i class="icon-white icon-remove"></i>
+            <?php echo $this->lang->line('delete') . $this->lang->line('product') ; ?> 
+            </button>
           </div>
  		  <label class="control-label label-warning" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
  					<!-- Button -->

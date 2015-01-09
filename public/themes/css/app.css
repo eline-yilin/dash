@@ -145,3 +145,14 @@ background-position: -144px -144px;
 .icon-pencil {
 background-position: 0 -72px;
 }
+img.my-thumbnail{
+	width:100%;max-width:150px;
+	padding: 4px;
+margin-bottom: 20px;
+line-height: 1.42857143;
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 4px;
+-webkit-transition: all .2s ease-in-out;
+transition: all .2s ease-in-out;
+	}

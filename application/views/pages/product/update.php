@@ -3,9 +3,10 @@
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
-<?php 
+<?php
+if(isset($resp)) var_dump($resp);
 $attributes = array('class' => 'product_create', 'id' => 'product_create');
-echo form_open_multipart('../product/create', $attributes);
+echo form_open_multipart('../' . uri_string(), $attributes);
  ?>
 
      <input type="hidden" id='_method' name="_method" value="CREATE">
@@ -14,17 +15,28 @@ echo form_open_multipart('../product/create', $attributes);
 	<fieldset>
       <div id="legend" class="">
         <legend class=""><?php echo $this->lang->line('uploadimage'); ?></legend>
-    <div class="control-group   {?sizewarning} error {/sizewarning}">
+     <div class="control-group   {?sizewarning} error {/sizewarning}">
           
           <!-- img-->
 			<div class="controls hidden imgRow" id="imgTemplate">
           		 <input type="file",  class="input-xlarge"  id='thumbnail'>
-          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i><?php echo $this->lang->line('createproduct') ; ?> </button>
+          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
+          		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
          	 </div>
-          <div class="controls imgRow" id='thumbnailContainer1'>
-            <input type="file", name="thumbnail1"  class="input-xlarge"  id='thumbnail1'>
-            <button type='button' class="btn btn-danger btn-mini" onclick='removeImage(1);'><i class="icon-white icon-remove"></i><?php echo $this->lang->line('createproduct') ; ?> </button>
+         <?php 
+         	$imgs = array();
+         	if($detail['img'])
+         	{
+         		$imgs = explode(',', $detail['img']);
+         	}
+         	foreach($imgs as $index => $img):?>
+         	 <div class="controls imgRow" id='thumbnailContainer<?php echo $index;?>'>
+           <img class='my-thumbnail' src = <?php echo $this->config->item( 'cdn_url_upload_img') .'product/' . $img; ?> />
+           <button type='button' class="btn btn-danger btn-mini" onclick='removeImage(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
+            <?php echo $this->lang->line('delete') . $this->lang->line('product') ; ?> </button>
           </div>
+         <?php endforeach;?>
+          
  		  <label class="control-label label-warning" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
  					<!-- Button -->
           <div class="controls">
@@ -45,7 +57,7 @@ echo form_open_multipart('../product/create', $attributes);
           <!-- Text input-->
           <label class="control-label" for="username"><?php echo $this->lang->line('productname'); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge required" name='productname' id='productname'  value=''>
+            <input type="text"  class="input-xlarge required" name='productname' id='productname'  value="<?php echo $detail['name'];?>">
           </div>
           <!-- category-->
 		  <label class="control-label hidden" for="phone"><?php echo $this->lang->line('category'); ?></label>
@@ -55,12 +67,12 @@ echo form_open_multipart('../product/create', $attributes);
            <!-- price-->
 		  <label class="control-label" for="price"><?php echo $this->lang->line('price'); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge required" name='price' id='price' value=''>
+            <input type="text"  class="input-xlarge required" name='price' id='price' value="<?php echo $detail['price'];?>">
           </div>
           <!-- desc-->
           <label class="control-label" for="phone"><?php echo $this->lang->line('description'); ?></label>
           <div class="controls">
-            <textarea  class="input-xlarge" name='description' id='description'></textarea>
+            <textarea  class="input-xlarge" name='description' id='description'><?php echo $detail['description'];?></textarea>
           </div>
           <!-- entity-->
           <label class="control-label"><?php echo $this->lang->line('entity'); ?></label>
@@ -69,7 +81,7 @@ echo form_open_multipart('../product/create', $attributes);
               <option value=''></option>
               <?php foreach($user['roles'] as $role):?>
               	<?php if($role['entity_type'] == 'entity' && !$role['is_deleted']):?>
-	               <option value='<?php echo $role["entity_id"];?>'><?php echo $role["entity_name"];?></option>";
+	               <option value='<?php echo $role["entity_id"];?>'    <?php if($detail['entity_id'] == $role["entity_id"]){ echo ' selected';} ?>><?php echo $role["entity_name"];?></option>";
 	             <?php endif;?>
              <?php endforeach;?>
             </select>
