@@ -56,6 +56,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
     <div class="control-group">
           <!-- Text input-->
           <label class="control-label" for="username"><?php echo $this->lang->line('productname'); ?></label>
+           <input type="hidden"  name='removed_img' id='removed_img' />
           <div class="controls">
             <input type="text"  class="input-xlarge required" name='productname' id='productname'  value="<?php echo $detail['name'];?>">
           </div>
@@ -122,8 +123,26 @@ echo form_open_multipart('../' . uri_string(), $attributes);
           }
         }
        function removeImage(index){
-    	   $('#thumbnailContainer' +　index).fadeOut().remove();
-    	   avail_img_index.push (index);
+    	  
+    	  var removed_img = $('#removed_img').val();
+    	  var remove_src = $('#thumbnailContainer' + index + ' img').attr('src');
+
+    	  var root_index = remove_src.lastIndexOf('product/') + 8;
+
+    	  remove_src = remove_src.substring(root_index);
+
+    	  if(!removed_img)
+    	  {
+    		  removed_img = remove_src;
+          }
+    	  else
+    	  {
+    		  removed_img += ',' + remove_src;
+          } 
+    	  $('#removed_img').val(removed_img);
+
+    	  $('#thumbnailContainer' +　index).fadeOut().remove();
+   	   	  avail_img_index.push (index);
        }
        var validator_messages = {
 

@@ -223,7 +223,8 @@ class user extends My_Controller {
 				else{
 					$this->data['resp'] = $resp;
 					$this->session->set_userdata('user', $resp);
-					redirect('../welcome', 'refresh');
+					$previous_url = $this->session->userdata('current_url');
+					redirect('../' . $previous_url, 'refresh');
 					
 				}
 
