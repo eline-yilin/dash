@@ -63,10 +63,17 @@ abstract class My_Controller extends CI_Controller
         $current_url = $router . '/' . $action;
         //$this->session->unset_userdata('user');
         $current_user = $this->session->userdata('user');
-        
+        $exception_arr = array(
+        		'user/login',
+        		'user/register',
+        		'welcome/index'
+        		
+        );
+        if(!in_array($current_url , $exception_arr)){
+        	$this->session->set_userdata('current_url', uri_string());
+        }
         if(!$current_user 
-        		&& strtolower( $current_url) != 'user/login'  
-        		&& strtolower( $current_url) != 'user/register'){
+        		&& !in_array($current_url , $exception_arr)){
         	redirect('../user/login', 'refresh');
         }
         else
@@ -74,7 +81,6 @@ abstract class My_Controller extends CI_Controller
         	$this->data['user'] = $current_user;
         }
         
-
     }
 
 

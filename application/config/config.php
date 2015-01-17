@@ -378,7 +378,7 @@ $config['nav_arr'] = array(
 				'text'=>"商铺管理"
 		),
 
-		"user" => array(
-				'text'=>"用户管理"
+		"order" => array(
+				'text'=>"订单管理"
 		),
 );
