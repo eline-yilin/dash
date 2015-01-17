@@ -1,7 +1,0 @@
-./build
-/public/img/upload/full
-/public/img/upload/thumbnail
-/config
-/themes
-/wechat
-/application/config/*
