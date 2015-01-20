@@ -10,7 +10,6 @@ $lang['category']			= "类目";
 $lang['price']			= "价格";
 $lang['description']			= "描述";
 $lang['entity']			= "店铺";
-$lang['entity']			= "商品";
 $lang['displayinfo']			= "展示信息";
 $lang['priority']			= "优先级";
 $lang['submit']			= "提交";
