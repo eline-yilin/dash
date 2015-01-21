@@ -65,15 +65,13 @@ abstract class My_Controller extends CI_Controller
         $current_user = $this->session->userdata('user');
         $exception_arr = array(
         		'user/login',
-        		'user/register',
-        		'welcome/index'
-        		
+        		'user/register',	
         );
         if(!in_array($current_url , $exception_arr)){
         	$this->session->set_userdata('current_url', uri_string());
         }
         if(!$current_user 
-        		&& !in_array($current_url , $exception_arr)){
+        		&& !in_array($current_url , $exception_arr) && $current_url != 'welcome/index'){
         	redirect('../user/login', 'refresh');
         }
         else

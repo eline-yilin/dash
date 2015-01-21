@@ -1,5 +1,4 @@
 <h2><?php echo $title;?></h2>
-
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>

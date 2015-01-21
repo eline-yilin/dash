@@ -20,7 +20,7 @@ class Welcome extends My_Controller {
 	public function index()
 	{
 		$this->load->view('templates/header');
-		$this->load->view('pages/home/index');
+		$this->load->view('pages/home/index',$this->data);
 		$this->load->view('templates/footer');
 	}
 }

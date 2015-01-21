@@ -156,7 +156,14 @@ class store extends My_Controller {
 						$request_url = 'store/detail/format/json';
 	
 						$resp = my_api_request($request_url , $method = 'post', $request);
-	
+						$this->data['user']['roles'][] = array(
+								'entity_type'=>'entity',
+								'entity_id'=>$resp,
+								'entity_name'=>$this->input->post('entityname'),
+								'is_deleted'=>'0',
+								
+						);
+						$this->session->set_userdata('user', $this->data['user']);
 						$this->data['resp'] = json_decode($resp,true);
 	
 			}
